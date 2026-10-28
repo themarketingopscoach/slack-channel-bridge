@@ -1,0 +1,6 @@
+{
+  "name": "slack",
+  "description": "Slack channel for Claude Code: Socket Mode bridge with a sender allowlist, threaded replies, choice buttons and owner-only permission relay.",
+  "version": "0.1.0",
+  "keywords": ["slack", "messaging", "channel", "mcp"]
+}

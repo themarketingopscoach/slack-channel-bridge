@@ -1,0 +1,19 @@
+#!/usr/bin/expect -f
+# Usage: expect -f start-livingstone-bridge.exp ["opening instruction"]
+# Same as start-abi-bridge.exp, for run-livingstone-bridge.sh: start the launcher, answer the development-channels
+# warning with "I am using this for local development" (Enter on the default option), then hand the session to
+# the terminal. Window size is copied from the calling terminal.
+set dir "$env(HOME)/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Claude Code/slack-channel"
+cd $dir
+if {[catch {lassign [exec stty size <@stdin] rows cols}]} { set rows 40; set cols 140 }
+set stty_init "rows $rows columns $cols"
+set opening [lindex $argv 0]
+set timeout 90
+if {$opening eq ""} { spawn ./run-livingstone-bridge.sh } else { spawn ./run-livingstone-bridge.sh $opening }
+expect {
+  -re {Enter.{0,40}to.{0,40}confirm} { sleep 1; send "\r" }
+  -re {development.{0,40}channels} { exp_continue }
+  timeout { send_user "\n(no development-channels warning seen; continuing)\n" }
+}
+set timeout -1
+interact

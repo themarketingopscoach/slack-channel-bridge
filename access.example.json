@@ -1,0 +1,5 @@
+{
+  "allowFrom": ["YOUR_SLACK_USER_ID", "COLLEAGUE_SLACK_USER_ID"],
+  "permissionApprovers": ["YOUR_SLACK_USER_ID"],
+  "requireMentionInChannels": false
+}
